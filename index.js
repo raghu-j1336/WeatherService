@@ -30,12 +30,12 @@ restService.use(
 restService.use(bodyParser.json());
 
 restService.post("/getWeatherService", function(req, res) {
-  var city = req.body.queryResult.parameters.geo-city;
+  //var city = req.body.queryResult.parameters.geo-city;
   //var temp  = getWeatherInfo(city);
  var temp = 1;
   var speech =
     req.body.queryResult &&
-    req.body.queryResult.parameters && ${temp};
+    req.body.queryResult.parameters;
   return res.json({
     speech: speech,
     displayText: speech,
