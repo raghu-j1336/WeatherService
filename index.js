@@ -5,10 +5,10 @@ const bodyParser = require("body-parser");
 
 const restService = express();
 const fetch = require('node-fetch');
-const { OPENWEATHER_API_KEY } = a707631010fd6300d47d98e6e038151c;
+//const { OPENWEATHER_API_KEY } = a707631010fd6300d47d98e6e038151c;
 
 
- const getWeatherInfo = city =>
+/* const getWeatherInfo = city =>
       fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHER_API_KEY}`
       )
@@ -19,7 +19,7 @@ const { OPENWEATHER_API_KEY } = a707631010fd6300d47d98e6e038151c;
           return celsius;
         })
         .catch(error => console.log(error));
-
+*/
 
 restService.use(
   bodyParser.urlencoded({
@@ -31,7 +31,8 @@ restService.use(bodyParser.json());
 
 restService.post("/getWeatherService", function(req, res) {
   var city = req.body.queryResult.parameters.geo-city;
-  var temp  = getWeatherInfo(city);
+  //var temp  = getWeatherInfo(city);
+ var temp = 1;
   var speech =
     req.body.queryResult &&
     req.body.queryResult.parameters && ${temp};
