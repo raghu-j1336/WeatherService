@@ -13,19 +13,36 @@ restService.use(
 
 restService.use(bodyParser.json());
 
-restService.post("/echo", function(req, res) {
+restService.post("/getWeatherService", function(req, res) {
+  var city = req.body.result.parameters.geo-city;
+  var temp  = getWeather(city);
   var speech =
     req.body.result &&
-    req.body.result.parameters &&
-    req.body.result.parameters.echoText
-      ? req.body.result.parameters.echoText
-      : "Seems like some problem. Speak again.";
+    req.body.result.parameters && temp;
   return res.json({
     speech: speech,
     displayText: speech,
     source: "webhook-echo-sample"
   });
 });
+
+var apiKey = a707631010fd6300d47d98e6e038151c;
+var result;
+
+function cb(err, response, body) {
+var weather = JSON.parse(body);
+result = weather.main.temp;
+}
+
+
+function getWeather(city) {
+	var url = http://api.openweathermap.org/data/2.5/weather?q=${city},uk&appid=${apiKey}
+	result = undefined;
+	var req = request(url,cb);
+	return result;
+}
+
+
 
 restService.post("/audio", function(req, res) {
   var speech = "";
