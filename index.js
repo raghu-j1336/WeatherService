@@ -4,6 +4,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const restService = express();
+const fetch = require('node-fetch');
+const { OPENWEATHER_API_KEY } = a707631010fd6300d47d98e6e038151c;
+
+
+ const getWeatherInfo = city =>
+      fetch(
+        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHER_API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => {
+          const kelvin = data.main.temp;
+          const celsius = Math.round(kelvin - 273.15);
+          return celsius;
+        })
+        .catch(error => console.log(error));
+
 
 restService.use(
   bodyParser.urlencoded({
@@ -15,10 +31,10 @@ restService.use(bodyParser.json());
 
 restService.post("/getWeatherService", function(req, res) {
   var city = req.body.result.parameters.geo-city;
-  var temp  = getWeather(city);
+  var temp  = getWeatherInfo(city);
   var speech =
     req.body.result &&
-    req.body.result.parameters && temp;
+    req.body.result.parameters && ${temp};
   return res.json({
     speech: speech,
     displayText: speech,
@@ -26,21 +42,7 @@ restService.post("/getWeatherService", function(req, res) {
   });
 });
 
-var apiKey = a707631010fd6300d47d98e6e038151c;
-var result;
 
-function cb(err, response, body) {
-var weather = JSON.parse(body);
-result = weather.main.temp;
-}
-
-
-function getWeather(city) {
-	var url = http://api.openweathermap.org/data/2.5/weather?q=${city},uk&appid=${apiKey}
-	result = undefined;
-	var req = request(url,cb);
-	return result;
-}
 
 
 
